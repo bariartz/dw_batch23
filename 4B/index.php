@@ -27,13 +27,39 @@ if ($conn->connect_errno) {
         <?php
         $getData = mysqli_query($conn, "SELECT * FROM `book_tb`");
         if (mysqli_num_rows($getData) > 0) {
+            $id = 1;
             while ($book = mysqli_fetch_array($getData)) {
+                $noId = $id++;
+                $getPenulis = mysqli_query($conn, "SELECT * FROM `writer_tb` WHERE `id`='$book[writer_id]'");
+                $penulis = mysqli_fetch_array($getPenulis);
+                $getCategory = mysqli_query($conn, "SELECT * FROM `category_tb` WHERE `id`='$book[category_id]'");
+                $cat = mysqli_fetch_array($getCategory);
         ?>
                 <div class="card" style="width: 18rem;">
                     <img src="<?php echo $book['img']; ?>" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $book['name']; ?></h5>
-                        <button type="button" class="btn btn-primary" id="viewDetail">View Detail</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewDetail<?php echo $noId; ?>">View Detail</button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="viewDetail<?php echo $noId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Detail Buku</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Penulis : <?php echo $penulis['name'] ?></h5>
+                                <h5>Tahun publish : <?php $date = date_create($book['Publication_year']);
+                                                    echo date_format($date, "Y"); ?></h5>
+                                <h5>Kategori : <?php echo $cat['name']; ?></h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
         <?php }
@@ -97,49 +123,6 @@ if ($conn->connect_errno) {
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Tambah</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="addWriter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Penulis</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="input1" class="form-label">Nama Penulis</label>
-                        <input type="text" class="form-control" id="input1" name="judulbuku">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Tambah</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="detailBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Detail Buku</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5>Penulis :<div id="nama-penulis"></div>
-                </h5>
-                <h5>Tahun publis : <div id="tahun-publis"></div>
-                </h5>
-            </div>
-            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
