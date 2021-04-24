@@ -7,4 +7,4 @@ No 1,2, dan 3 langsung copy paste and run di Console Javascript seperti https://
 
 **4B**
 
-Belum siap, karena telat ketiduran, dan siapnya cuma setengah, tinggal input doang. :( Semoga aja lewat.
+Belum siap, karena ketiduran, dan siapnya cuma setengah, tinggal fungsi input data doang. :( Semoga aja lewat.
