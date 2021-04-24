@@ -19,7 +19,7 @@ const printPattern = (n) => {
         str += "\n";
     }
 
-    console.log(str);
+    return str;
 }
 
 console.log(printPattern(5));
