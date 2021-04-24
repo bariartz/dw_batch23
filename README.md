@@ -5,4 +5,6 @@ No 1,2, dan 3 langsung copy paste and run di Console Javascript seperti https://
 
 **Folder 4A : Screenshot query DB**
 
-**Folder 4B : Sedang dalam proses pembuatan**
+**4B**
+
+Belum siap, karena telat ketiduran, dan siapnya cuma setengah, tinggal input doang. :( Semoga aja lewat.
